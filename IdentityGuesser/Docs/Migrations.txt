@@ -1,0 +1,5 @@
+﻿==============================  HealthContext =============================
+
+Enable-Migrations -ContextTypeName PoemContext -MigrationsDirectory Migrations\Poem
+Add-migration -ConfigurationTypeName IdentityGuesser.Migrations.Poem.Configuration "FirstMigration"
+Update-database -ConfigurationTypeName IdentityGuesser.Migrations.Poem.Configuration
