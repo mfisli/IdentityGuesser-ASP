@@ -139,6 +139,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Poem\201703300359597_FirstMigration.cs" />
+    <Compile Include="Migrations\Poem\201703300359597_FirstMigration.Designer.cs">
+      <DependentUpon>201703300359597_FirstMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Poem\Configuration.cs" />
     <Compile Include="Models\PoemContext.cs" />
     <Compile Include="Models\PoemModel.cs" />
@@ -193,6 +197,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\Poem\201703300359597_FirstMigration.resx">
+      <DependentUpon>201703300359597_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -14,6 +14,6 @@ namespace IdentityGuesser.Models
         public string Age { get; set; }
         public string Gender { get; set; }
         public string Caption { get; set; }
-        public IEnumerable<String> Tags { get; set; }
+        public string Tags { get; set; }
     }
 }

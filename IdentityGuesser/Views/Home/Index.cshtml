@@ -1,4 +1,7 @@
-﻿@{
+﻿@using IdentityGuesser.Models;
+@model IdentityGuesser.Models.PoemModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -25,8 +28,17 @@
     </div>
     <hr />
     <div class="caption">
-        <img src="@ViewBag.ImageData" />
-        @ViewBag.FileName <br />
-        @ViewBag.Caption
+        <img src="@ViewBag.ImagePath" width="196" />
+        @*@ViewBag.FileName <br />*@
+        <p>
+            Caption:
+            @ViewBag.Caption <br />
+            Tags:
+            @ViewBag.Tags <br />
+            Age:
+            @ViewBag.Age <br />
+            Gender:
+            @ViewBag.Gender <br />
+        </p>
     </div>
 </div>
