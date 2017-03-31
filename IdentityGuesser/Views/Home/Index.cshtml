@@ -9,10 +9,6 @@
     <h1>Poetry Bot</h1>
     <p class="lead">Poetry Bot is a free web application that creates poems base on the photo you upload.<br/> 
     This app is possible due to the wondeful work provided by Microsoft Cognitive Services API</p>
-    <p><a href="https://www.microsoft.com/cognitive-services" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<div class="container" style="padding-top: 24px">
     <div class="row">
         <div class="col-sm-8">
             @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -20,25 +16,23 @@
                 <input type="file" name="file" id="upload" style="display: none" onchange="$('#submit').click();" />
                 <input type="button" value="Upload a Photo" class="btn btn-primary btn-lg" onclick="$('#upload').click();" />
                 <input type="submit" id="submit" style="display: none" />
-               
             }
-        </div>
-        <div class="col-sm-4 pull-right">
-        </div>
+         </div>
     </div>
-    <hr />
-    <div class="caption">
+</div>
+<hr />
+<div class="container col-sm-12" style="padding-top: 24px">
+    <div class="col-sm-4 text-center">
         <img src="@ViewBag.ImagePath" width="196" />
-        @*@ViewBag.FileName <br />*@
+    </div>
+    <div class="col-sm-8">
         <p>
-            Caption:
             @ViewBag.Caption <br />
-            Tags:
             @ViewBag.Tags <br />
-            Age:
             @ViewBag.Age <br />
-            Gender:
             @ViewBag.Gender <br />
         </p>
     </div>
+
+    
 </div>

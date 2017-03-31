@@ -22,17 +22,9 @@ namespace IdentityGuesser.Controllers
         {
             return View();
         }
-
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "This is a bot that uses Microsoft Cognitive Services. You can upload a photo and the bot will guess the age, gender, and a caption of that it sees.";
 
             return View();
         }
@@ -56,7 +48,7 @@ namespace IdentityGuesser.Controllers
                                    Server.MapPath("~/Images"), pic);
                 // file is uploaded
                 file.SaveAs(path);
-                ViewBag.FileName = path;
+                //ViewBag.FileName = path;
                 Debug.WriteLine("path: " + path);
                 // Create Project Oxford Computer Vision API Service client
                 var SubscriptionKey = WebConfigurationManager.AppSettings["SubscriptionKey"];
@@ -76,14 +68,15 @@ namespace IdentityGuesser.Controllers
                     var gender = analysisResult.Faces[0].Gender;
                     var caption = analysisResult.Description.Captions[0].Text;
                     List<string> tags = new List<string>();
+                    ViewBag.Tags = "Tags : "; 
                     for (int i = 0; i < analysisResult.Description.Tags.Length; i++)
                     {
                         ViewBag.Tags += analysisResult.Description.Tags[i] + " ";
                     }
                     ViewBag.ImagePath = "..\\Images\\" + pic;
-                    ViewBag.Age = age;
-                    ViewBag.Gender = gender;
-                    ViewBag.Caption = caption;                
+                    ViewBag.Age = "Age: " + age;
+                    ViewBag.Gender = "Gender : " + gender;
+                    ViewBag.Caption = "Caption : " + caption;                
                 }
 
             }
