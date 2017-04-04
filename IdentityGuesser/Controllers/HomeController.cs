@@ -43,6 +43,16 @@ namespace IdentityGuesser.Controllers
                     return RedirectToAction("Index");
                 }
 
+                System.IO.DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/Images"));
+
+                var deleteCount = 0;
+                foreach (FileInfo image in di.GetFiles())
+                {
+                    image.Delete();
+                    deleteCount++;
+                }
+                Debug.WriteLine("Images deleted: " + deleteCount);
+
                 string pic = System.IO.Path.GetFileName(file.FileName);
                 string path = System.IO.Path.Combine(
                                    Server.MapPath("~/Images"), pic);
