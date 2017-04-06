@@ -45,27 +45,27 @@ namespace IdentityGuesser.Controllers
 
                 System.IO.DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/Images"));
 
-                //var deleteCount = 0;
-                //foreach (FileInfo image in di.GetFiles())
-                //{
-                //    image.Delete();
-                //    deleteCount++;
-                //}
-                //Debug.WriteLine("Images deleted: " + deleteCount);
+                var deleteCount = 0;
+                foreach (FileInfo image in di.GetFiles())
+                {
+                    image.Delete();
+                    deleteCount++;
+                }
+                Debug.WriteLine("Images deleted: " + deleteCount);
 
                 string pic = System.IO.Path.GetFileName(file.FileName);
                 string path = System.IO.Path.Combine(
                                    Server.MapPath("~/Images"), pic);
                 // file is uploaded
-                //file.SaveAs(path);
+                file.SaveAs(path);
                 //ViewBag.FileName = path;
                 Debug.WriteLine("path: " + path);
                 // Create Project Oxford Computer Vision API Service client
                 var SubscriptionKey = WebConfigurationManager.AppSettings["SubscriptionKey"];
                 VisionServiceClient VisionServiceClient = new VisionServiceClient(SubscriptionKey);
                 Debug.WriteLine("VisionServiceClient is created");
-                //using (Stream imageFileStream = System.IO.File.OpenRead(path))
-                //{
+                using (Stream imageFileStream = System.IO.File.OpenRead(path))
+                {
                     // Analyze the image for features
                     Debug.WriteLine("Calling VisionServiceClient.AnalyzeImageAsync()...");
                     //VisualFeature.Description, VisualFeature.Faces
@@ -73,7 +73,7 @@ namespace IdentityGuesser.Controllers
                     {
                         VisualFeature.Faces, VisualFeature.Description
                     };
-                    AnalysisResult analysisResult = await VisionServiceClient.AnalyzeImageAsync("http://steezo.com/wp-content/uploads/2012/12/man-in-suit2.jpg", visualFeatures);
+                    AnalysisResult analysisResult = await VisionServiceClient.AnalyzeImageAsync(imageFileStream, visualFeatures);
                     var age = analysisResult.Faces[0].Age.ToString();
                     var gender = analysisResult.Faces[0].Gender;
                     var caption = analysisResult.Description.Captions[0].Text;
@@ -87,7 +87,7 @@ namespace IdentityGuesser.Controllers
                     ViewBag.Age = "Age: " + age;
                     ViewBag.Gender = "Gender : " + gender;
                     ViewBag.Caption = "Caption : " + caption;                
-               // }
+                }
 
             }
             return View("Index");
