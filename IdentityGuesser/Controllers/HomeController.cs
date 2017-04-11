@@ -123,6 +123,7 @@ namespace IdentityGuesser.Controllers
                     //result.Name: the name of the search result
                     //result.Link: the link of the search result
                     //ViewBag.Message = result[0].Link;
+                    ViewBag.Emotion = "You seem to be feeling: " + confidentEmotion; 
                     ViewBag.Images = new String[5];
                     for(var i = 0; i < 5 && i < result.Count; i++)
                     {
