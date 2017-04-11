@@ -27,18 +27,15 @@ namespace IdentityGuesser.Controllers
         }
         public ActionResult About()
         {
-            ViewBag.Message = "This is a bot that uses Microsoft Cognitive Services. You can upload a photo and the bot will guess the age, gender, and a caption of that it sees.";
+            ViewBag.Message = "This is a bot that uses Microsoft Cognitive Services. You can upload a photo and the bot will guess the age, gender, and produce a caption of that it sees.";
 
             return View();
         }
         [HttpPost]
         public async Task<ActionResult> Upload(HttpPostedFileBase file)
         {
-            //PoemModel poemModel = new PoemModel();
-            //PoemContext db = new PoemContext();
             if (file != null && file.ContentLength > 0)
-            {
-                
+            {                
                 // Make sure the user selected an image file
                 if (!file.ContentType.StartsWith("image"))
                 {
@@ -78,9 +75,6 @@ namespace IdentityGuesser.Controllers
                     {
                         VisualFeature.Faces, VisualFeature.Description
                     };
-
-
-
                     //payload 
                     AnalysisResult analysisResult = await VisionServiceClient.AnalyzeImageAsync(imageFileStream, visualFeatures);
                     var age = analysisResult.Faces[0].Age.ToString();
@@ -99,7 +93,6 @@ namespace IdentityGuesser.Controllers
                 }
                 using (Stream imageFileStream = System.IO.File.OpenRead(path))
                 {
-
                     var emotionServiceClient = new EmotionServiceClient("1829328c70be4f8aa8cb16da23ba10b2");
                     var emotionResult = await emotionServiceClient.RecognizeAsync(imageFileStream);
                     // find most confident emotion dectection
@@ -135,9 +128,7 @@ namespace IdentityGuesser.Controllers
                     {
                         ViewBag.Images[i] = result[i].Link;
                     }
-
                 }
-
             }
             return View("Index");
         }
