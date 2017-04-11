@@ -1,0 +1,145 @@
+[33mcommit ef0eeb506420dd0ad7e6c229743a4f1684fb6a1b[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Wed Apr 5 20:07:21 2017 -0700
+
+    OMG AZURE DOESNT COPY ALL FOLDERS WITH GIT DEPLOYMENT - the images dir didn't exist in the server. Pls work.
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 1f469f8c51675a4af60bceb5366c32d3a5eb304f[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Wed Apr 5 19:56:30 2017 -0700
+
+    Attempted to test sending cog api just an url
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 0be1a07b352a482c52158ecdbdac4f57f5753ad7[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Wed Apr 5 19:45:09 2017 -0700
+
+    #3
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 26920e512a09e95466bbf28c4ecfbc94a9e94c86[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Wed Apr 5 19:39:24 2017 -0700
+
+    #1
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 070dda0372c32a6fae90acf831f770e5c3b8593d[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Wed Apr 5 19:37:14 2017 -0700
+
+     sigh....
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit fa97de6716545eb750a9b58d3cf7069b9d9d3ff5[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Tue Apr 4 21:11:19 2017 -0700
+
+    I have no idea what I'm diing
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 25bbca672db0f9b0224fe22bbecda9335004a2d6[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Tue Apr 4 20:52:01 2017 -0700
+
+    omg pls show detailed errors!
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit f35470f2f3de6a040c276dad82f488fc00c61ff0[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Tue Apr 4 20:29:51 2017 -0700
+
+    fighting deployment
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit ac813fe7d759ffefc9fb81a1a5595b17425dcdad[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Tue Apr 4 09:39:26 2017 -0700
+
+    Oh boy, errors during deployment - enabling detailed error messages
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit b00ba71f55a04eb62d10a042e477309e31b833ea[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Tue Apr 4 09:28:00 2017 -0700
+
+    forgot to add .
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 546dcd020deb8b2ded982f606638833b9ded884e[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Thu Mar 30 18:58:53 2017 -0700
+
+    Deployment pains starts. Enabling server error msgs.
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 95cd0ab55013a18c6f642307ef5d512b1167f0ce[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Thu Mar 30 18:27:30 2017 -0700
+
+    corrected title of site
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 3b246951eee2ab506347da1c6d6be52ea429aeb7[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Thu Mar 30 18:27:16 2017 -0700
+
+    Prep for deployment. Removed contact page, added info in about page, named application, cleaned up front end responsiveness
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit a687b20111927da8375be435ea3ef960aac358ad[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Thu Mar 30 00:00:27 2017 -0700
+
+    Bot is able to display thumbnail of photo. Maving trouble saving model to db so the current hotfix is to uses view bags. Todo: establish poem construction
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 7bf3b4a233043695752165820841d3a67a4f291d[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Wed Mar 29 20:08:57 2017 -0700
+
+    Bot is able to see age and gender. Also returns a caption and tags. Todo: populate the model.
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 8cbb23c9d3e13a78cfccd0a7b6796a8b927b3486[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Wed Mar 29 13:32:01 2017 -0700
+
+    Able to save images. Next: same path of image to model
+    
+    Signed-off-by: Maks Fisli <mfisli2@gmail.com>
+
+[33mcommit 9b9d7eee9c4e029120098afc25edf875788e0197[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Thu Mar 9 10:19:47 2017 -0800
+
+    First Commit (blank mvc project)
+
+[33mcommit 804b98f0d0077a661639177ad08e320d26455ea0[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Thu Mar 9 09:36:50 2017 -0800
+
+    Add project files.
+
+[33mcommit c9d7f760028ce87b2050a39b17985043d20ea841[m
+Author: Maks Fisli <mfisli2@gmail.com>
+Date:   Thu Mar 9 09:36:46 2017 -0800
+
+    Add .gitignore and .gitattributes.

@@ -1,5 +1,4 @@
-﻿@using IdentityGuesser.Models;
-@model IdentityGuesser.Models.PoemModel
+﻿
 
 @{
     ViewBag.Title = "Home Page";
@@ -31,6 +30,16 @@
             @ViewBag.Tags <br />
             @ViewBag.Age <br />
             @ViewBag.Gender <br />
+            @if (ViewBag.Images != null)
+            {
+                foreach (var image in ViewBag.Images)
+                {
+                    <img src=@image />
+                }
+
+            }
+
+
         </p>
     </div>
 
