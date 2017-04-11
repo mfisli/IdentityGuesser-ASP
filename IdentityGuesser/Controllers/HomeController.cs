@@ -37,93 +37,106 @@ namespace IdentityGuesser.Controllers
             if (file != null && file.ContentLength > 0)
             {                
                 // Make sure the user selected an image file
+                // TODO: exception thrown if image > 4MB
                 if (!file.ContentType.StartsWith("image"))
                 {
                     TempData["Message"] = "Only image files may be uploaded";
                     return RedirectToAction("Index");
                 }
+                if (file.ContentLength > 102400)
+                {
+                    TempData["Message"] = "Filesize of image is too large. Maximum file size permitted is " + 4 + "KB";
+                    return RedirectToAction("Index");
+                }
                 // Make sure Images Dir exists on local and on deploy server! 
                 System.IO.DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/Images"));
-
+                // Delete all old images
                 var deleteCount = 0;
                 foreach (FileInfo image in di.GetFiles())
                 {
                     image.Delete();
                     deleteCount++;
                 }
-                Debug.WriteLine("Images deleted: " + deleteCount);
-
                 string pic = System.IO.Path.GetFileName(file.FileName);
-                string path = System.IO.Path.Combine(
-                                   Server.MapPath("~/Images"), pic);
+                string path = System.IO.Path.Combine(Server.MapPath("~/Images"), pic);
+                // holds payloads from api calls
                 var gender = string.Empty;
                 var caption = string.Empty;
-                // file is uploaded
+                var age = string.Empty;
                 file.SaveAs(path);
-                //ViewBag.FileName = path;
                 Debug.WriteLine("path: " + path);
-                // Create Project Oxford Computer Vision API Service client
+                //.............................................................
+                // Computer Vision service API
                 var SubscriptionKey = WebConfigurationManager.AppSettings["SubscriptionKey"];
                 VisionServiceClient VisionServiceClient = new VisionServiceClient(SubscriptionKey);
-                Debug.WriteLine("VisionServiceClient is created");
                 using (Stream imageFileStream = System.IO.File.OpenRead(path))
                 {
-                    // Analyze the image for features
-                    Debug.WriteLine("Calling VisionServiceClient.AnalyzeImageAsync()...");
-                    //VisualFeature.Description, VisualFeature.Faces
                     VisualFeature[] visualFeatures = new VisualFeature[]
                     {
                         VisualFeature.Faces, VisualFeature.Description
                     };
-                    //payload 
+                    // vision payload 
                     AnalysisResult analysisResult = await VisionServiceClient.AnalyzeImageAsync(imageFileStream, visualFeatures);
-                    var age = analysisResult.Faces[0].Age.ToString();
-                    gender = analysisResult.Faces[0].Gender;
-                    caption = analysisResult.Description.Captions[0].Text;
-                    List<string> tags = new List<string>();
-                    ViewBag.Tags = "Tags : ";
-                    for (int i = 0; i < analysisResult.Description.Tags.Length; i++)
+                    if (analysisResult.Faces.Length != 0)
                     {
-                        ViewBag.Tags += analysisResult.Description.Tags[i] + " ";
+                        age = analysisResult.Faces[0].Age.ToString();
+                        gender = analysisResult.Faces[0].Gender;
+                        
                     }
+                    else
+                    {
+                        age = "unknown";
+                        gender = "unknown";
+                    }
+                    // Assume: there is always a caption
+                    caption = analysisResult.Description.Captions[0].Text;
+                    //List<string> tags = new List<string>();
+                    //ViewBag.Tags = "Tags : ";
+                    //for (int i = 0; i < analysisResult.Description.Tags.Length; i++)
+                    //{
+                    //    ViewBag.Tags += analysisResult.Description.Tags[i] + " ";
+                    //}
                     ViewBag.ImagePath = "..\\Images\\" + pic;
-                    ViewBag.Age = "Age: " + age;
-                    ViewBag.Gender = "Gender : " + gender;
-                    ViewBag.Caption = "Caption : " + caption;
+                    ViewBag.Age = age;
+                    ViewBag.Gender = gender;
+                    ViewBag.Caption = caption;
                 }
+                //.............................................................
+                // Emotion Service API
+                var emotionServiceClient = new EmotionServiceClient("1829328c70be4f8aa8cb16da23ba10b2"); // should be in appsettings
                 using (Stream imageFileStream = System.IO.File.OpenRead(path))
                 {
-                    var emotionServiceClient = new EmotionServiceClient("1829328c70be4f8aa8cb16da23ba10b2");
+                    // emotion payload
                     var emotionResult = await emotionServiceClient.RecognizeAsync(imageFileStream);
-                    // find most confident emotion dectection
                     Dictionary<string, double> emoResultDictionary = new Dictionary<string, double>();
                     if (emotionResult.Length != 0)
                     {
                         foreach (var item in emotionResult)
                         {
-                            Debug.WriteLine("____________________ Fear: " + item.Scores.Fear);
                             emoResultDictionary.Add("Fear", item.Scores.Fear);
-                            Debug.WriteLine("____________________ Contempt: " + item.Scores.Contempt);
                             emoResultDictionary.Add("Contempt", item.Scores.Contempt);
-                            Debug.WriteLine("____________________ Disgust: " + item.Scores.Disgust);
                             emoResultDictionary.Add("Disgust", item.Scores.Disgust);
-                            Debug.WriteLine("____________________ Anger: " + item.Scores.Anger);
                             emoResultDictionary.Add("Anger", item.Scores.Anger);
-                            Debug.WriteLine("____________________ Happiness: " + item.Scores.Happiness);
                             emoResultDictionary.Add("Happiness", item.Scores.Happiness);
-                            Debug.WriteLine("____________________ Surprise: " + item.Scores.Surprise);
                             emoResultDictionary.Add("Surprise", item.Scores.Surprise);
-                            Debug.WriteLine("____________________ Neutral: " + item.Scores.Neutral);
                             emoResultDictionary.Add("Neutral", item.Scores.Neutral);
                         }
                     }
-                    var confidentEmotion = emoResultDictionary.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
-                    Debug.WriteLine("_________ Most Confident: " + confidentEmotion + " at " + emoResultDictionary.Values.Max());
+                    // get key with highest value 
+                    var confidentEmotion = string.Empty;
+                    if (emoResultDictionary.Count != 0)
+                    {
+                        confidentEmotion = emoResultDictionary.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+                        ViewBag.Emotion = confidentEmotion;
+                    }
+                    else
+                    {
+                        ViewBag.Emotion = "No Emotion dectected";
+                    }
+                    //.............................................................
+                    // bing image search API
+                    // limit results to 5 for similar images based on emotion and caption 
                     List<SearchResult> result = BingWebSearcher.Search(confidentEmotion + " " + caption);
-                    //result.Name: the name of the search result
-                    //result.Link: the link of the search result
-                    //ViewBag.Message = result[0].Link;
-                    ViewBag.Emotion = "You seem to be feeling: " + confidentEmotion; 
                     ViewBag.Images = new String[5];
                     for(var i = 0; i < 5 && i < result.Count; i++)
                     {

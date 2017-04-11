@@ -25,13 +25,19 @@
         <img src="@ViewBag.ImagePath" width="296" />
     </div>
     <div class="col-sm-8">
-        <p class="h4">
-            @ViewBag.Caption <br />
-            @*@ViewBag.Tags <br />*@
-            @ViewBag.Age <br />
-            @ViewBag.Gender <br />
-            @ViewBag.Emotion <br />
-        </p>
+        @if (ViewBag.Caption != null)
+        {
+            <p>
+                <h4>Caption:</h4>
+                @ViewBag.Caption <br />
+                <h4>Age:</h4>
+                @ViewBag.Age <br />
+                <h4>Gender:</h4>
+                @ViewBag.Gender <br />
+                <h4>You seem to be feeling:</h4>
+                @ViewBag.Emotion <br />
+            </p>
+        }
     </div>
 </div>
 <hr />
