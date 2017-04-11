@@ -22,26 +22,28 @@
 <hr />
 <div class="container col-sm-12" style="padding-top: 24px">
     <div class="col-sm-4 text-center">
-        <img src="@ViewBag.ImagePath" width="196" />
+        <img src="@ViewBag.ImagePath" width="296" />
     </div>
     <div class="col-sm-8">
-        <p>
+        <p class="h4">
             @ViewBag.Caption <br />
-            @ViewBag.Tags <br />
+            @*@ViewBag.Tags <br />*@
             @ViewBag.Age <br />
             @ViewBag.Gender <br />
-            @if (ViewBag.Images != null)
-            {
-                foreach (var image in ViewBag.Images)
-                {
-                    <img src=@image />
-                }
-
-            }
-
-
         </p>
     </div>
-
-    
 </div>
+<hr />
+<div class="container col-sm-12" style="padding-top: 24px">
+    <div>
+        @if (ViewBag.Images != null)
+            {
+            <h4> That image reminds me of these:<br /></h4>
+            foreach (var image in ViewBag.Images)
+            {
+                <img src=@image />
+            }
+        }
+    </div>
+</div>
+
