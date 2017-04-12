@@ -43,11 +43,11 @@ namespace IdentityGuesser.Controllers
                     TempData["Message"] = "Only image files may be uploaded";
                     return RedirectToAction("Index");
                 }
-                if (file.ContentLength > 102400)
-                {
-                    TempData["Message"] = "Filesize of image is too large. Maximum file size permitted is " + 4 + "KB";
-                    return RedirectToAction("Index");
-                }
+                //if (file.ContentLength > 102400)
+                //{
+                //    TempData["Message"] = "Filesize of image is too large. Maximum file size permitted is " + 4 + "KB";
+                //    return RedirectToAction("Index");
+                //}
                 // Make sure Images Dir exists on local and on deploy server! 
                 System.IO.DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/Images"));
                 // Delete all old images
