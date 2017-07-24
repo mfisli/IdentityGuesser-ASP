@@ -13,34 +13,36 @@
             {
                 <small> Images must be less than 4MB.</small><br />
                 <input type="file" name="file" id="upload" style="display: none" onchange="$('#submit').click();" />
-                <input type="button" value="Upload a Photo" class="btn btn-primary btn-lg" onclick="$('#upload').click();" />
+                <input type="button" value="Upload a Photo" class="btn btn-primary btn-lg uploadBtn" onclick="$('#upload').click();" />
                 <input type="submit" id="submit" style="display: none" />
             }
          </div>
     </div>
 </div>
 <hr />
-<div class="container col-sm-12" style="padding-top: 24px">
-    <div class="col-sm-4 text-center">
-        <img src="@ViewBag.ImagePath" width="296" />
+<div id="loading"></div>
+@if (ViewBag.Caption != null)
+{
+    <div class="container col-sm-12" style="padding-top: 24px">
+        <div class="col-sm-4 text-center">
+            <img src="@ViewBag.ImagePath" width="296" />
+        </div>
+        <div class="col-sm-8">
+                <p>
+                    <h4>Caption:</h4>
+                    @ViewBag.Caption <br />
+                    <h4>Age:</h4>
+                    @ViewBag.Age <br />
+                    <h4>Gender:</h4>
+                    @ViewBag.Gender <br />
+                    <h4>You seem to be feeling:</h4>
+                    @ViewBag.Emotion <br />
+                </p>
+        </div>
     </div>
-    <div class="col-sm-8">
-        @if (ViewBag.Caption != null)
-        {
-            <p>
-                <h4>Caption:</h4>
-                @ViewBag.Caption <br />
-                <h4>Age:</h4>
-                @ViewBag.Age <br />
-                <h4>Gender:</h4>
-                @ViewBag.Gender <br />
-                <h4>You seem to be feeling:</h4>
-                @ViewBag.Emotion <br />
-            </p>
-        }
-    </div>
-</div>
-<hr />
+    <hr />
+}
+ 
 <div class="container col-sm-12" style="padding-top: 24px">
     <div>
         @if (ViewBag.Images != null)
