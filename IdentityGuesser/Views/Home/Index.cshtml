@@ -23,11 +23,11 @@
 <hr />
 @if (ViewBag.Caption != null)
 {
-    <div class="container col-sm-12" style="padding-top: 24px">
-        <div class="col-sm-4 text-center">
-            <img src="@ViewBag.ImagePath" width="296" />
+    <div class="container col-sm-12">
+        <div class="col-md-4">
+            <img src="@ViewBag.ImagePath" width="296" class="text-center" />
         </div>
-        <div class="col-sm-8">
+        <div class="col-md-8">
                 <p>
                     <h4>Caption:</h4>
                     @ViewBag.Caption <br />
@@ -43,7 +43,7 @@
     <hr />
 }
  
-<div class="container col-sm-12" style="padding-top: 24px">
+<div class="container col-sm-12">
     <div>
         @if (ViewBag.Images != null)
             {
