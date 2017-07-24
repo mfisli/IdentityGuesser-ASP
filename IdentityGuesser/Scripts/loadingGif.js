@@ -11,7 +11,7 @@ window.onload = function () {
         if (loading) {
             log(loading);
             var source = "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
-            loading.innerHTML = "<img src=\'" + source + "\' alt='loading...'/>";
+            loading.innerHTML = "<img src=\'" + source + "\' alt='loading...' width='296px'/>";
         }   
     });
 }
