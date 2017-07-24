@@ -12,6 +12,7 @@
         <div class="col-sm-8">
             @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
+                <small> Images must be less than 4MB.</small><br />
                 <input type="file" name="file" id="upload" style="display: none" onchange="$('#submit').click();" />
                 <input type="button" value="Upload a Photo" class="btn btn-primary btn-lg" onclick="$('#upload').click();" />
                 <input type="submit" id="submit" style="display: none" />
