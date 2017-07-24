@@ -6,8 +6,7 @@
 
 <div class="jumbotron">
     <h1>Identity Guesser</h1>
-    <p class="lead">IdentityGuesser is a free web application that makes a guess as to what it sees in the photo you upload.<br/> 
-    This app is possible due to the wonderful work provided by Microsoft Cognitive Services API</p>
+    <p class="lead">Upload a photo and this app will guess the age, gender, and provide a caption.</p>
     <div class="row">
         <div class="col-sm-8">
             @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
